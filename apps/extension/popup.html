@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Back on Track · ILIAS</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <span class="eyebrow">BACK ON TRACK / KIT ILIAS</span>
+    <h1>Dein Material.<br />Dein Fortschritt.</h1>
+    <p>
+      Öffne einen Kurs in ILIAS. Die Erweiterung liest sichtbare Materiallinks
+      mit deiner bestehenden Anmeldung. Passwörter und Sitzungscookies werden
+      nicht ausgelesen.
+    </p>
+    <label
+      ><input type="checkbox" id="nested" /> Verlinkte Kurse und Unterordner
+      lesen (max. 50 Seiten)</label
+    >
+    <button id="scan">Aktuelle ILIAS-Seite lesen</button>
+    <p id="status" role="status">
+      Bereit. Unbekannte Daten kannst du in der Website korrigieren.
+    </p>
+    <a id="app" target="_blank" rel="noopener">Back on Track öffnen →</a>
+    <p>
+      Unter „Import & Backup“ die Erweiterungs-ID eintragen und „Sync von ILIAS“
+      wählen. Jeder Import benötigt deine Freigabe.
+    </p>
+    <small>Erweiterungs-ID</small><code id="extension-id"></code
+    ><button id="download" disabled>JSON exportieren</button
+    ><button id="clear" class="secondary">Importdaten löschen</button>
+    <script src="popup.js"></script>
+  </body>
+</html>

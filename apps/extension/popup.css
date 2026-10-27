@@ -1,0 +1,57 @@
+:root {
+  font: 14px/1.6 system-ui;
+  color: #202c2b;
+  background: #f7f9f7;
+}
+body {
+  width: 340px;
+  margin: 0;
+  padding: 24px;
+}
+h1 {
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+.eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #267568;
+}
+button {
+  display: block;
+  width: 100%;
+  margin: 14px 0;
+  padding: 12px;
+  border: 0;
+  border-radius: 8px;
+  background: #26695d;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.secondary {
+  background: #e5ebe7;
+  color: #34423b;
+}
+code {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+a {
+  color: #267568;
+}
+#status {
+  padding: 12px;
+  background: #eaf0eb;
+  border-radius: 8px;
+}
+label {
+  display: block;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "@back-on-track/domain",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts"
+}
