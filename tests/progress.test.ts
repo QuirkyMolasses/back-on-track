@@ -9,6 +9,17 @@ import {
 } from '../packages/domain/src/index';
 import { fixtureCourse, fixtureItem } from './helpers';
 describe('linear weighted course planning', () => {
+  it('withholds planning for offset dates outside the supported calendar', () => {
+    expect(
+      calculateProgress(
+        fixtureCourse({ examDate: '1900-01-01', bufferDays: 7 }),
+        '2026-01-16',
+      ).status,
+    ).toBe('invalid-interval');
+    const c = fixtureCourse({ mode: 'track' });
+    c.items[0]!.uploadedOn = '9999-12-31';
+    expect(calculateProgress(c, '2026-01-16').status).toBe('invalid-interval');
+  });
   it('matches the 30-day numerical example: 60% at day 15 = +3 days', () => {
     const p = calculateProgress(fixtureCourse(), '2026-01-16');
     expect(p.duration).toBe(30);

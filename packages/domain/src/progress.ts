@@ -48,14 +48,21 @@ export function calculateProgress(course: Course, today: string): Progress {
     .flatMap((i) => (i.uploadedOn ? [i.uploadedOn] : []))
     .sort();
   const latest = uploads.at(-1);
-  const deadline =
-    course.mode === 'exam'
-      ? course.examDate
-        ? addDays(course.examDate, -course.bufferDays)
-        : null
-      : latest
-        ? addDays(latest, course.followUpDays)
-        : null;
+  let deadline: string | null = null;
+  let invalidDeadline = false;
+  try {
+    deadline =
+      course.mode === 'exam'
+        ? course.examDate
+          ? addDays(course.examDate, -course.bufferDays)
+          : null
+        : latest
+          ? addDays(latest, course.followUpDays)
+          : null;
+  } catch {
+    // A valid input at the supported calendar boundary may overflow after an offset.
+    invalidDeadline = true;
+  }
   const warnings: string[] = [];
   if (course.mode === 'track' && relevant.some((i) => !i.uploadedOn))
     warnings.push('missing-upload-dates');
@@ -70,6 +77,7 @@ export function calculateProgress(course: Course, today: string): Progress {
     warnings,
   };
   if (work.actual === null) return result;
+  if (invalidDeadline) return { ...result, status: 'invalid-interval' };
   if (!deadline) return { ...result, status: 'missing-deadline' };
   const start = dayNumber(course.startDate),
     end = dayNumber(deadline),

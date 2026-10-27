@@ -3,6 +3,7 @@ import {
   classify,
   emptyWorkspace,
   importSchema,
+  iliasUrlSchema,
   mergeCourse,
   parseImport,
   syncRequestSchema,
@@ -27,6 +28,15 @@ const incoming: ImportedCourse = {
   ],
 };
 describe('idempotent import and user ownership', () => {
+  it.each([
+    'not-a-url',
+    'https://user:password@ilias.studium.kit.edu/goto.php/file/1',
+  ])(
+    'rejects malformed or credential-bearing source URLs without throwing: %s',
+    (url) => {
+      expect(iliasUrlSchema.safeParse(url).success).toBe(false);
+    },
+  );
   it('shares strict versioned request and response validation across extension and website', () => {
     const nonce = crypto.randomUUID();
     expect(
